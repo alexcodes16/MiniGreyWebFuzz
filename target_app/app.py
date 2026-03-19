@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from flask import Flask, request
 
-from target_app.coverage_tracker import get_coverage, mark, reset_coverage
+try:
+    from target_app.coverage_tracker import get_coverage, mark, reset_coverage
+except ModuleNotFoundError:
+    # Support direct execution via `python target_app/app.py`.
+    from coverage_tracker import get_coverage, mark, reset_coverage
 
 app = Flask(__name__)
 
